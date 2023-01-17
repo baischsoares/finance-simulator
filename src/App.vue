@@ -26,6 +26,7 @@ export default {
   --corPreta: #000;
   --corBege: #F8BD8B;
   --corRoxa: #844685;
+  --corVerde: #2ab331
 }
 
 *{
@@ -50,6 +51,7 @@ a{
 .container{
   max-width: 1400px;
   margin: 0px auto;
+  padding: 0px 15px;
 }
 
 </style>
