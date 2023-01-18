@@ -7,7 +7,7 @@
         <router-link to="/investimentos">Meus investimentos</router-link>
       </div>
         <div>
-          <img class="img-perfil" src="../assets/avatar.png" alt="">
+          <router-link to="/perfil"><img class="img-perfil" src="../assets/avatar.png" alt=""></router-link>
         </div>
     </nav>
   </header>
@@ -50,5 +50,8 @@ a:hover {
 .router-link-exact-active{
   background: var(--corAzul);
   color: var(--corBranca);
+}
+a[href="/perfil"]{
+  background: none !important;
 }
 </style>

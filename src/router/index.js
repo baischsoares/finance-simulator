@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import Acoes from '../views/Acoes.vue';
+import PerfilUsuario from '../views/PerfilUsuario.vue';
 
 const routes = [
   {
@@ -11,10 +12,12 @@ const routes = [
   {
     path: '/acoes',
     name: 'Acoes',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: Acoes,
+  },
+  {
+    path: '/perfil',
+    name: 'PerfilUsuario',
+    component: PerfilUsuario,
   },
 ];
 
