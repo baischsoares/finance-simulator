@@ -19,6 +19,14 @@ export default {
   computed:{
     ...mapState(["usuario"]),
   },
+  methods: {
+    pegarUsuario(){
+      this.$store.dispatch('pegarUsuário')
+    }
+  },
+  created(){
+    this.pegarUsuario()
+  }
 }
 </script>
 <style scoped>
