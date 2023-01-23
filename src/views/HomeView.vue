@@ -21,7 +21,8 @@ export default {
   },
   methods: {
     pegarUsuario(){
-      this.$store.dispatch('pegarUsuário')
+      this.$store.dispatch('pegarUsuario', this.$store.state.usuario)
+      console.log(this.$store.state.usuario)
     }
   },
   created(){
