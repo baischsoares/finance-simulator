@@ -70,7 +70,7 @@ input[type="email"]{
   width: 300px;
   border: 1px solid var(--corAzul);
 }
-input[type="submit"]{
+input[type="submit"], .btn{
   margin-top: 10px;
   height: 42px;
   right: 1px;
@@ -79,6 +79,7 @@ input[type="submit"]{
   border: 2px solid var(--corAzul);
   color: var(--corAzul);
   font-weight: bold;
+  padding: 5px 15px;
 }
 input[type="text"]:focus,
 input[type="text"]:hover,
@@ -86,7 +87,7 @@ input[type="email"]:hover{
   outline: var(--corAzul);
   border: 2px solid var(--corAzul);
 }
-input[type="submit"]:hover{
+input[type="submit"]:hover, .btn:hover{
   background: var(--corAzul);
   color: var(--corBranca);
 }

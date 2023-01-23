@@ -34,6 +34,7 @@
    },
    methods: {
     criarUsuario(){
+      this.usuario.valor = Number(this.usuario.valor)
       this.$store.dispatch('criarUsuario', this.usuario)
     }
    }
