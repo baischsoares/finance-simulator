@@ -8,7 +8,7 @@
         <label for="email">Email</label>
         <input type="email" name="email" id="email" v-model="usuario.email">
         <label for="idade">Idade</label>
-        <input type="text" name="idade" id="idade" v-model="usuario.idade">
+        <input type="number" name="idade" id="idade" v-model="usuario.idade">
         <label for="valor">Qual valor você quer iniciar?</label>
         <input type="range" min="10000" max="100000" name="valor" id="valor" v-model="usuario.valor">
         <p>{{ $filters.valorEmReal(usuario.valor) }}</p>
