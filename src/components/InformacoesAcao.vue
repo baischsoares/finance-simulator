@@ -5,7 +5,7 @@
         <h1>{{ acao.symbol }}</h1> <h2>{{ $filters.valorEmReal(acao.regularMarketPrice) }}</h2>
       </div>
       <div class="botoes">
-        <button class="btn-comprar">Comprar</button>
+        <button class="btn-comprar" @click="compra = true ">Comprar</button>
         <button class="btn-vender">Vender</button>
       </div>
     </div>
@@ -19,17 +19,28 @@
         {{  $filters.valorEmReal(acao.regularMarketDayLow) }} - {{ $filters.valorEmReal(acao.regularMarketDayHigh) }} 
       </div>
     </div>
+    <CompraVendaAcao v-if="compra" :acao="acao">
+      <button class="btn-comprar" @click="comprar">Comprar</button>
+      <button class="btn" @click="compra = false">Fechar</button>
+    </CompraVendaAcao>
   </div>
  </template>
 
 
  <script>
+ import CompraVendaAcao from '@/components/CompraVendaAcao.vue'
  
   export default {
    name: "InformacoesAcao",
+   components: {
+    CompraVendaAcao
+   },
    data(){
     return{
-      acao: ''
+      acao: '',
+      compra: false,
+      acaoComprada: '',
+      quantidade: 0
     }
    },
    computed: {
@@ -46,13 +57,16 @@
           this.acao = r.results[0];
       })
     },
-   },
+   comprar(){
+    this.acaoComprada
+   }
+  },
    watch:{
     url(){
       this.fetchAcao();
     }
    },
- }
+  }
  </script>
  
  <style scoped>
@@ -76,25 +90,9 @@
 }
 .botoes button{
   margin-left: 20px;
-  cursor: pointer;
-  height: 40px;
-  padding: 0px 10px;
-  border: none;
-  border-radius: 4px;
 }
-.botoes button:hover{
-  transform: scale(1.1);
-}
-.btn-comprar {
-  background: var(--corVerde);
-  font-weight: bold;
-  color: var(--corBranca);
-}
-.btn-vender {
-  background: var(--corCinza);
-  font-weight: bold;
-  color: var(--corBranca);
-}
+
+
 h3{
   margin-top: 10px;
 }
