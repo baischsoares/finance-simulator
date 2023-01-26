@@ -9,6 +9,9 @@ const store = createStore({
     CRIAR_USUARIO(state, payload) {
       state.usuario = payload;
     },
+    ATUALIZAR_USUARIOS_COMPRA_ACAO(state, payload) {
+      state.usuario = payload;
+    },
   },
   actions: {
     criarUsuario(context, payload) {
@@ -19,6 +22,10 @@ const store = createStore({
       if (localStorage.usuario) {
         context.state.usuario = JSON.parse(localStorage.getItem('usuario'));
       }
+    },
+    atualizarUsuarioCompraAcao(context, payload) {
+      context.commit('ATUALIZAR_USUARIOS_COMPRA_ACAO', payload);
+      localStorage.setItem('usuario', JSON.stringify(payload));
     },
   },
   modules: {},

@@ -10,6 +10,7 @@
         <p>Saldo Disponível: <span> {{ $filters.valorEmReal(usuario.valor) }}</span></p>
         <p v-if="saldo < 0" style="font-size: 14px; color:red;">Você não possui saldo suficiente</p>
       </div>
+      <button v-if="saldo > 0" class="btn-comprar" @click="comprar(acao)">Comprar</button>
       <slot></slot>
     </div>
   </section>
@@ -24,7 +25,8 @@
    props: ["acao"],
    data(){
     return{
-      quantidade: 0
+      quantidade: 0,
+      acaoComprada: {}
     }
    }, 
    computed: {
@@ -38,8 +40,22 @@
       return this.usuario.valor - this.precoTotal;
     },
    },
- }
- </script>
+   methods: {
+    comprar(acao){
+      this.acaoComprada.symbol = acao.symbol;
+      this.acaoComprada.preco = acao.regularMarketPrice;
+      this.acaoComprada.quantidade = this.quantidade;
+
+      this.usuario.valor = this.saldo
+      this.usuario.acoesCompradas.push(this.acaoComprada)
+
+      this.$store.dispatch('atualizarUsuarioCompraAcao', this.usuario)
+      console.log(this.usuario)
+    },
+  },
+}
+
+</script>
  
  <style scoped>
 .full-width{

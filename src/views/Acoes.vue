@@ -16,11 +16,6 @@ export default {
     BuscarAcoes,
     InformacoesAcao
   },
-  methods:{
-    buscarAcoes(){
-      this.$router.push( {query: {q: this.acao}} )
-    }
-  },
 }
 </script>
 

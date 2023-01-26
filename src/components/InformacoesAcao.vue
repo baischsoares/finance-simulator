@@ -5,7 +5,7 @@
         <h1>{{ acao.symbol }}</h1> <h2>{{ $filters.valorEmReal(acao.regularMarketPrice) }}</h2>
       </div>
       <div class="botoes">
-        <button class="btn-comprar" @click="compra = true ">Comprar</button>
+        <button class="btn-comprar" @click="compraModal = true ">Comprar</button>
         <button class="btn-vender">Vender</button>
       </div>
     </div>
@@ -19,13 +19,11 @@
         {{  $filters.valorEmReal(acao.regularMarketDayLow) }} - {{ $filters.valorEmReal(acao.regularMarketDayHigh) }} 
       </div>
     </div>
-    <CompraVendaAcao v-if="compra" :acao="acao">
-      <button class="btn-comprar" @click="comprar">Comprar</button>
-      <button class="btn" @click="compra = false">Fechar</button>
+    <CompraVendaAcao v-if="compraModal" :acao="acao">
+      <button class="btn" @click="compraModal = false">Fechar</button>
     </CompraVendaAcao>
   </div>
  </template>
-
 
  <script>
  import CompraVendaAcao from '@/components/CompraVendaAcao.vue'
@@ -38,9 +36,7 @@
    data(){
     return{
       acao: '',
-      compra: false,
-      acaoComprada: '',
-      quantidade: 0
+      compraModal: false,
     }
    },
    computed: {
@@ -57,9 +53,6 @@
           this.acao = r.results[0];
       })
     },
-   comprar(){
-    this.acaoComprada
-   }
   },
    watch:{
     url(){
