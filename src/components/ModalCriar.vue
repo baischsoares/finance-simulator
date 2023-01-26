@@ -35,7 +35,7 @@
    methods: {
     criarUsuario(){
       this.usuario.valor = Number(this.usuario.valor)
-      this.usuario.acoesCompradas = Array
+      this.usuario.acoesCompradas = []
       this.$store.dispatch('criarUsuario', this.usuario)
     }
    }

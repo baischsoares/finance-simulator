@@ -48,9 +48,7 @@
 
       this.usuario.valor = this.saldo
       this.usuario.acoesCompradas.push(this.acaoComprada)
-
       this.$store.dispatch('atualizarUsuarioCompraAcao', this.usuario)
-      console.log(this.usuario)
     },
   },
 }

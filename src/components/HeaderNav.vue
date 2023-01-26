@@ -23,23 +23,25 @@ export default {
 <style scoped>
 header{
   margin-bottom: 40px;
+  
 }
 nav{
   box-shadow: 0 4px 8px rgba(20, 40, 60, .2);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 0px;
+  padding: 10px 20px;
 }
-a{
+.links a{
   display: inline-block;
-  margin-right: 30px;
   color: var(--corAzul);
   font-weight: 600;
   padding: 10px 20px;
   border-radius: 4px;
+  margin-right: 20px;
 }
-a:hover {
+
+.links a:hover {
   background: var(--corAzul);
   color: var(--corBranca);
 }
@@ -47,7 +49,7 @@ a:hover {
   height: 60px;
   vertical-align: top;
 }
-.router-link-exact-active{
+.links a.router-link-exact-active{
   background: var(--corAzul);
   color: var(--corBranca);
 }
