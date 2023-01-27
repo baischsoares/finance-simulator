@@ -84,8 +84,6 @@
 .botoes button{
   margin-left: 20px;
 }
-
-
 h3{
   margin-top: 10px;
 }
