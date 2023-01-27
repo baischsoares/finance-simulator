@@ -91,4 +91,27 @@ input[type="submit"]:hover, .btn:hover{
   background: var(--corAzul);
   color: var(--corBranca);
 }
+.btn-comprar,.btn-vender{
+  cursor: pointer;
+  height: 40px;
+  padding: 0px 10px;
+  border: none;
+  border-radius: 4px;
+  border: none;
+}
+
+.btn-comprar {
+  background: var(--corVerde);
+  font-weight: bold;
+  color: var(--corBranca);
+}
+.btn-vender {
+  background: var(--corCinza);
+  font-weight: bold;
+  color: var(--corBranca);
+}
+.btn-comprar:hover,
+.btn-vender:hover{
+  transform: scale(1.1);
+}
 </style>

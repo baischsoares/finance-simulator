@@ -21,12 +21,11 @@ export default {
   },
   methods: {
     pegarUsuario(){
-      this.$store.dispatch('pegarUsuario', this.$store.state.usuario)
-      console.log(this.$store.state.usuario)
+      this.$store.dispatch('pegarUsuario', this.$store.state.usuario);
     }
   },
   created(){
-    this.pegarUsuario()
+    this.pegarUsuario();
   }
 }
 </script>
