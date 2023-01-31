@@ -2,15 +2,20 @@
   <section>
     <div v-if="acoesCompradas">
       <h3>Minhas Ações</h3>
-      <ul>
-        <li v-for="(acao, index) in acoesCompradas" :key="index">
-          <span>{{acao.symbol}}</span>
-          <span>{{acao.quantidade}}</span>
-          <span>{{ $filters.valorEmReal(acao.preco) }}</span>
-          <span>{{ $filters.valorEmReal(acao.precoAtual)}}</span>
-          <span :class="acao.LucroPrejuizo > 0 ? 'lucro' : 'prejuizo'">{{ acao.LucroPrejuizo }}</span>
-        </li>
-      </ul>
+      <table>
+        <tr>
+          <td>Ação</td>
+          <td>Quantidade</td>
+          <td>Preço de Compra</td>
+          <td>Preço Atual</td>
+        </tr>
+        <tr v-for="(acao, index) in acoesCompradas" :key="index">
+          <td>{{acao.symbol}}</td>
+          <td>{{acao.quantidade}}</td>
+          <td>{{ $filters.valorEmReal(acao.preco) }}</td>
+          <td>{{ $filters.valorEmReal(acao.precoAtual)}}</td>
+        </tr>
+      </table>
     </div>
   </section>
   
@@ -27,42 +32,35 @@
     },
     acoesCompradas(){
       return this.$store.state.usuario.acoesCompradas
-    },
+    },  
    },
   methods:{
-    fetchPrecoAtual(){
-      this.acoesCompradas.forEach((acao, index) => {
-        let codigoAcao = acao.symbol
+     fetchPrecoAtual(){
+      this.acoesCompradas.forEach((acao) => {
+        let codigoAcao = acao.symbol;
         fetch(`https://brapi.dev/api/quote/${codigoAcao}`)
         .then(r => r.json())
-        .then(r => {
-            let acaoPrecoAtual = r.results[0].regularMarketPrice
-            let acao = this.acoesCompradas[index]
-            let acaoArray = Object.values(acao)
-
-            if(acaoArray.includes(codigoAcao)){
-              acao.precoAtual = acaoPrecoAtual
-              acao.LucroPrejuizo = (acao.precoAtual - acao.preco) * acao.quantidade
-            } 
+        .then( r => {
+          //adiciona o preço atual no objeto ação
+          let acaoPrecoAtual = r.results[0].regularMarketPrice
+          acao.precoAtual = acaoPrecoAtual
         })
-      })
+       })
+       this.$store.dispatch('criarUsuario', this.usuario)
+      },
     },
-   },
    created(){
-    this.fetchPrecoAtual()
-   }
+     this.fetchPrecoAtual()
+   },
  }
+
  </script>
  
  <style scoped>
-
-span{
-  margin-right: 20px;
-}
-.lucro{
-  color: green;
-}
-.prejuizo{
-  color: red;
-}
+  section{
+    background: orange;
+    width: max-content;
+    padding: 20px 40px;
+    border-radius: 4px;
+  }
  </style>

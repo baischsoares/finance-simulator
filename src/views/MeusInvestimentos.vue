@@ -1,15 +1,15 @@
 <template>
  <h2>Meus investimentos</h2>
- <MinhasAcoes />
+ <MinhasAcoes /> 
 </template>
 
 <script>
 
-import MinhasAcoes from '@/components/MinhasAcoes.vue'
+ import MinhasAcoes from '@/components/MinhasAcoes.vue'
 export default {
   name: "MeusInvestimentos",
   components: {
-    MinhasAcoes
+     MinhasAcoes
   },
 }
 </script>
