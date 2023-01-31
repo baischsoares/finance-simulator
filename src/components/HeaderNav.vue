@@ -23,7 +23,6 @@ export default {
 <style scoped>
 header{
   margin-bottom: 40px;
-  
 }
 nav{
   box-shadow: 0 4px 8px rgba(20, 40, 60, .2);

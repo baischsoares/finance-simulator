@@ -19,13 +19,8 @@ export default {
   computed:{
     ...mapState(["usuario"]),
   },
-  methods: {
-    pegarUsuario(){
-      this.$store.dispatch('pegarUsuario', this.$store.state.usuario);
-    }
-  },
   created(){
-    this.pegarUsuario();
+    this.$store.dispatch('pegarUsuario', this.$store.state.usuario);
   }
 }
 </script>

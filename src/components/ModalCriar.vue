@@ -11,7 +11,7 @@
         <input type="number" name="idade" id="idade" v-model="usuario.idade">
         <label for="valor">Qual valor você quer iniciar?</label>
         <input type="range" min="10000" max="100000" name="valor" id="valor" v-model="usuario.valor">
-        <p>{{ $filters.valorEmReal(usuario.valor) }}</p>
+        <p v-if="usuario.valor">{{ usuario.valor }}</p>
         <input type="submit" class="btn" value="Criar Usuário" @click.prevent="criarUsuario">
       </form>
     </div>
