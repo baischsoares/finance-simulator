@@ -6,7 +6,6 @@
       </div>
       <div class="botoes">
         <button class="btn-comprar" @click="compraModal = true ">Comprar</button>
-        <button class="btn-vender">Vender</button>
       </div>
     </div>
     <div class="acao-informacoes">

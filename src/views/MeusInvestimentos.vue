@@ -10,6 +10,9 @@ export default {
   components: {
      MinhasAcoes
   },
+  created(){
+    this.$store.dispatch('pegarUsuario', this.$store.state.usuario);
+  }
 }
 </script>
 

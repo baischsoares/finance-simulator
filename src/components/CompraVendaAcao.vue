@@ -59,7 +59,6 @@
         } else {
           this.comprarAcao(acao)
         }
-        
       } else {
         this.comprarAcao(acao)
       }
