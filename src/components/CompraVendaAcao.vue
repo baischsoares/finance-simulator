@@ -42,14 +42,37 @@
    },
    methods: {
     comprar(acao){
-      this.acaoComprada.symbol = acao.symbol;
-      this.acaoComprada.preco = acao.regularMarketPrice;
-      this.acaoComprada.quantidade = this.quantidade;
+       if(this.usuario.acoesCompradas.length > 0){
+        //logica para conseguir o index da acao
+        let acoesCodigos = Object.values(this.usuario.acoesCompradas)
+        let index = acoesCodigos.findIndex((acaoCodigo) => {
+            return acaoCodigo.symbol === acao.symbol
+        })
+        if(index > -1){
+            this.usuario.valor = this.saldo
+              //novos valores adicionados
+            this.usuario.acoesCompradas[index].quantidade += this.quantidade;
+            let precoMedio = ((this.usuario.acoesCompradas[index].preco * this.usuario.acoesCompradas[index].quantidade) + (acao.regularMarketPrice + this.quantidade)) / (this.usuario.acoesCompradas[index].quantidade + this.quantidade) //calculo do preço médio das ações
 
-      this.usuario.valor = this.saldo
-      this.usuario.acoesCompradas.push(this.acaoComprada)
-      this.$store.dispatch('atualizarUsuarioCompraAcao', this.usuario)
-    },
+            this.usuario.acoesCompradas[index].preco = precoMedio
+           
+        } else {
+          this.comprarAcao(acao)
+        }
+        
+      } else {
+        this.comprarAcao(acao)
+      }
+  },
+    comprarAcao(acao){
+      this.acaoComprada.symbol = acao.symbol;
+              this.acaoComprada.preco = acao.regularMarketPrice;
+              this.acaoComprada.quantidade = this.quantidade;
+
+              this.usuario.valor = this.saldo
+              this.usuario.acoesCompradas.push(this.acaoComprada)
+              this.$store.dispatch('atualizarUsuarioCompraAcao', this.usuario)
+    }
   },
 }
 

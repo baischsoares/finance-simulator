@@ -1,7 +1,7 @@
 <template >
   <section class="container">
     <div class="secao">
-      <div v-if="acoesCompradas">
+      <div v-if="usuario.acoesCompradas">
       <h3>Minhas Ações</h3>
       <table>
         <tr>
@@ -10,11 +10,11 @@
           <td>Preço de Compra</td>
           <td>Preço Atual</td>
         </tr>
-        <tr v-for="(acao, index) in acoesCompradas" :key="index">
+        <tr v-for="(acao, index) in usuario.acoesCompradas" :key="index">
           <td>{{acao.symbol}}</td>
           <td>{{acao.quantidade}}</td>
           <td>{{ $filters.valorEmReal(acao.preco) }}</td>
-          <td>{{ $filters.valorEmReal(acao.precoAtual)}}</td>
+          <td v-if="acao.precoAtual">{{ $filters.valorEmReal(acao.precoAtual)}}</td>
           <td><button class="btn-vender">Vender</button></td>
         </tr>
       </table>
@@ -34,13 +34,10 @@
     usuario(){
       return this.$store.state.usuario
     },
-    acoesCompradas(){
-      return this.$store.state.usuario.acoesCompradas
-    },  
    },
   methods:{
      fetchPrecoAtual(){
-      this.acoesCompradas.forEach((acao) => {
+      this.usuario.acoesCompradas.forEach((acao) => {
         let codigoAcao = acao.symbol;
         fetch(`https://brapi.dev/api/quote/${codigoAcao}`)
         .then(r => r.json())
@@ -54,7 +51,8 @@
       },
     },
    created(){
-     this.fetchPrecoAtual()
+    this.fetchPrecoAtual();
+    console.log(this.usuario)
    },
  }
 
