@@ -1,6 +1,7 @@
-<template>
-  <section>
-    <div v-if="acoesCompradas">
+<template >
+  <section class="container">
+    <div class="secao">
+      <div v-if="acoesCompradas">
       <h3>Minhas Ações</h3>
       <table>
         <tr>
@@ -18,6 +19,8 @@
         </tr>
       </table>
     </div>
+    </div>
+    
   </section>
   
  </template>
@@ -58,7 +61,7 @@
  </script>
  
  <style scoped>
-  section{
+  .secao{
     box-shadow: 0 4px 8px rgba(20, 40, 60, .2);
     max-width: 700px;
     margin: 40px 0px;
