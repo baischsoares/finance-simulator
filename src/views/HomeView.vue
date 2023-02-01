@@ -1,9 +1,14 @@
 <template>
-  <div class="home">
+  <div class="home container">
     <div v-if="!usuario">
-       <ModalCriar>
-      
-      </ModalCriar>
+       <ModalCriar/>
+    </div>
+    <div class="sobre">
+      <h3>O que é o projeto?</h3>
+      <p>Esse é um projeto em desenvolvimento utilizando Vue.js</p>
+      <p>A ideia aqui é desenvolver um simulador de bolsa de valores, onde você poderá buscar, comprar e vender ações.</p>
+      <p>As informações das ações são conseguidas através da <a href="https://brapi.dev" target="_blank">API Brapi</a>.</p>
+      <p>As informações como usuário e ações compradas são armazenadas no localStorage. Por enquanto não há nenhuma manipulação de banco de dados no projeto.</p>
     </div>
   </div>
 </template>
@@ -25,7 +30,11 @@ export default {
 }
 </script>
 <style scoped>
-.criarUsuario{
-  text-align: center;
+.sobre{
+  max-width: 700px;
 }
+p{
+  margin-bottom: 10px;
+}
+
 </style>

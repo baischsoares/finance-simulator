@@ -1,6 +1,6 @@
 <template>
- <BuscarAcoes />
- <InformacoesAcao />
+ <BuscarAcoes class="container"/>
+ <InformacoesAcao class="container"/>
 </template>
 
 <script>

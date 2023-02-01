@@ -1,6 +1,6 @@
 <template>
   <header>
-    <nav>
+    <nav class="container">
       <div class="links">
         <router-link to="/">Início</router-link> 
         <router-link to="/acoes">Buscar ações</router-link>

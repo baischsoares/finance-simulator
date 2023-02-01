@@ -1,6 +1,5 @@
 <template>
- <h2>Meus investimentos</h2>
- <MinhasAcoes /> 
+ <MinhasAcoes/> 
 </template>
 
 <script>
@@ -14,6 +13,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
 </style>
