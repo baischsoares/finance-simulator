@@ -14,6 +14,7 @@
           <td>{{acao.quantidade}}</td>
           <td>{{ $filters.valorEmReal(acao.preco) }}</td>
           <td>{{ $filters.valorEmReal(acao.precoAtual)}}</td>
+          <td><button class="btn-vender">Vender</button></td>
         </tr>
       </table>
     </div>
@@ -58,9 +59,30 @@
  
  <style scoped>
   section{
-    background: orange;
-    width: max-content;
+    box-shadow: 0 4px 8px rgba(20, 40, 60, .2);
+    max-width: 700px;
+    margin: 40px 0px;
     padding: 20px 40px;
     border-radius: 4px;
+  }
+  h3{
+    margin-bottom: 20px;
+  }
+  table{
+    border-collapse: collapse; 
+    width: 100%;
+  }
+  tr{
+    border-bottom: 1px solid #d1d1d1;
+  }
+  td{
+    padding: 10px 0px;
+    text-align: center;
+  }
+  .btn-vender{
+    background-color: transparent;
+    border: 1px solid red;
+    color: red;
+    font-weight: 400;
   }
  </style>
