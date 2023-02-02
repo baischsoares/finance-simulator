@@ -1,27 +1,33 @@
 <template>
-  <div v-if="acao" class="acao-container">
-    <div  class="principal">
-      <div class="titulo-preco">
-        <h1>{{ acao.symbol }}</h1> <h2>{{ $filters.valorEmReal(acao.regularMarketPrice) }}</h2>
-      </div>
-      <div class="botoes">
-        <button class="btn-comprar" @click="compraModal = true ">Comprar</button>
-      </div>
-    </div>
-    <div class="acao-informacoes">
-      <h3>Nome da empresa</h3>
-      <p>{{ acao.longName }}</p>
-      <h3>Valor de mercado</h3>
-      <p>{{ $filters.valorEmReal(acao.marketCap) }}</p>
-      <h3>Variação diária</h3>
-      <div class="preco-marior-menor">
-        {{  $filters.valorEmReal(acao.regularMarketDayLow) }} - {{ $filters.valorEmReal(acao.regularMarketDayHigh) }} 
-      </div>
-    </div>
-    <CompraVendaAcao v-if="compraModal" :acao="acao">
-      <button class="btn" @click="compraModal = false">Fechar</button>
-    </CompraVendaAcao>
-  </div>
+  <section>
+        <div v-if="acao" class="acao-container">
+                  <div  class="principal">
+                    <div class="titulo-preco">
+                      <h1>{{ acao.symbol }}</h1> <h2>{{ $filters.valorEmReal(acao.regularMarketPrice) }}</h2>
+                    </div>
+                    <div class="botoes">
+                      <button class="btn-comprar" @click="compraModal = true ">Comprar</button>
+                    </div>
+                  </div>
+                  <div class="acao-informacoes">
+                    <h3>Nome da empresa</h3>
+                    <p>{{ acao.longName }}</p>
+                    <h3>Valor de mercado</h3>
+                    <p>{{ $filters.valorEmReal(acao.marketCap) }}</p>
+                    <h3>Variação diária</h3>
+                    <div class="preco-marior-menor">
+                      {{  $filters.valorEmReal(acao.regularMarketDayLow) }} - {{ $filters.valorEmReal(acao.regularMarketDayHigh) }} 
+                    </div>
+                  </div>
+                  <CompraVendaAcao v-if="compraModal" :acao="acao">
+                    <button class="btn" @click="compraModal = false">Fechar</button>
+                  </CompraVendaAcao>
+        </div>
+        <div v-if="erro">
+          <p>{{ erro }}</p>
+        </div>
+  </section>
+  
  </template>
 
  <script>
@@ -36,6 +42,7 @@
     return{
       acao: '',
       compraModal: false,
+      erro: ''
     }
    },
    computed: {
@@ -49,7 +56,13 @@
       fetch(`https://brapi.dev/api/quote/${codigoAcao}`)
       .then(r => r.json())
       .then(r => {
-          this.acao = r.results[0];
+          if(r.error){
+            this.acao = null
+            this.erro = r.error
+          } else{ 
+            this.acao = r.results[0];
+            this.erro = null
+          }
       })
     },
   },
