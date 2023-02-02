@@ -9,6 +9,7 @@
         <p v-if="precoTotal">Preço Total: <span> {{ $filters.valorEmReal(precoTotal) }}</span></p>
         <p>Saldo Disponível: <span> {{ $filters.valorEmReal(usuario.valor) }}</span></p>
         <p v-if="saldo < 0" style="font-size: 14px; color:red;">Você não possui saldo suficiente</p>
+        <p v-if="confirmacao" style="font-weight: normal;">Você comprou {{ quantidade }} ações</p>
       </div>
       <button v-if="saldo > 0" class="btn-comprar" @click="comprar(acao)">Comprar</button>
       <slot></slot>
@@ -26,7 +27,8 @@
    data(){
     return{
       quantidade: 0,
-      acaoComprada: {}
+      acaoComprada: {},
+      confirmacao: false
     }
    }, 
    computed: {
@@ -55,7 +57,8 @@
             let precoMedio = ((this.usuario.acoesCompradas[index].preco * this.usuario.acoesCompradas[index].quantidade) + (acao.regularMarketPrice + this.quantidade)) / (this.usuario.acoesCompradas[index].quantidade + this.quantidade) //calculo do preço médio das ações
 
             this.usuario.acoesCompradas[index].preco = precoMedio
-           
+            this.confirmarCompra()
+
         } else {
           this.comprarAcao(acao)
         }
@@ -71,7 +74,13 @@
               this.usuario.valor = this.saldo
               this.usuario.acoesCompradas.push(this.acaoComprada)
               this.$store.dispatch('atualizarUsuarioCompraAcao', this.usuario)
+              this.confirmarCompra()
+             
+    },
+    confirmarCompra(){
+      this.confirmacao = true
     }
+
   },
 }
 
@@ -113,5 +122,8 @@ p, label{
 }
 span{
   font-weight: normal;
+}
+.cv-container button{
+  width: 100%;
 }
  </style>

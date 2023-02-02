@@ -90,4 +90,7 @@ h3{
   margin-top: 20px;
   color: #ff0000;
 }
+.btn{
+  width: 100%;
+}
  </style>
