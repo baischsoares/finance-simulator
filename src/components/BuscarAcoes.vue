@@ -4,6 +4,7 @@
      <input type="text" name="acao" id="acao" v-model="acao" placeholder="Digite a ação">
      <input type="submit" value="Buscar" @click.prevent="buscarAcoes">
    </form>
+    
   </div>
  </template>
  <script>
