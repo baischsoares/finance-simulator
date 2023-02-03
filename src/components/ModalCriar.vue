@@ -36,6 +36,7 @@
     criarUsuario(){
       this.usuario.valor = Number(this.usuario.valor)
       this.usuario.acoesCompradas = []
+      this.usuario.historico = []
       this.$store.dispatch('criarUsuario', this.usuario)
     }
    }
