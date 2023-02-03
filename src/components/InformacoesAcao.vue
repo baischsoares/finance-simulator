@@ -3,7 +3,7 @@
         <div v-if="acao" class="acao-container">
                   <div  class="principal">
                     <div class="titulo-preco">
-                      <h1>{{ acao.symbol }}</h1> <h2>{{ $filters.valorEmReal(acao.regularMarketPrice) }}</h2>
+                      <h1>{{ acao.symbol }}</h1> <h3>{{ $filters.valorEmReal(acao.regularMarketPrice) }}</h3>
                     </div>
                     <div class="botoes">
                       <button class="btn-comprar" @click="compraModal = true ">Comprar</button>
@@ -85,10 +85,10 @@
   max-width: 500px;
   border: 4px;
   margin: 10px;
+  align-items: baseline;
 }
 
-.principal,
-.titulo-preco{
+.principal,.titulo-preco{
   display: flex;
   align-items: flex-start;
   gap: 20px;
@@ -105,5 +105,10 @@ h3{
 }
 .btn{
   width: 100%;
+}
+@media(max-width: 600px){
+  .botoes button{
+  margin-left: 0px;
+}
 }
  </style>
