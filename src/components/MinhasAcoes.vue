@@ -177,4 +177,9 @@ input[type="number"]{
   color: var(--corAzul);
   text-decoration: underline;
 }
+@media(max-width: 600px){
+  tr {
+    display: grid;
+  }
+}
  </style>
