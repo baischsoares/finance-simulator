@@ -1,12 +1,12 @@
 <template>
   <header>
-    <nav class="container">
+    <nav class="container header">
       <div class="links">
         <router-link to="/">Início</router-link> 
         <router-link to="/acoes">Buscar ações</router-link>
         <router-link to="/investimentos">Meus investimentos</router-link>
       </div>
-        <div>
+        <div class="perfil">
           <router-link to="/perfil"><img class="img-perfil" src="../assets/avatar.png" alt=""></router-link>
         </div>
     </nav>
@@ -27,6 +27,7 @@ header{
 nav{
   box-shadow: 0 4px 8px rgba(20, 40, 60, .2);
   display: flex;
+  overflow: hidden;
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
@@ -54,5 +55,22 @@ nav{
 }
 a[href="/perfil"]{
   background: none !important;
+}
+@media(max-width: 600px){
+  .header{
+    display: grid;
+    align-items: center;
+  }
+  .perfil{
+    grid-row: 1;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .links {
+    text-align: center;
+  }
+  .links a{
+    margin-right: 0px;
+  }
 }
 </style>
