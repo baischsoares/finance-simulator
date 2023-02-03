@@ -25,6 +25,10 @@
  </script>
  
  <style scoped>
-
+@media(max-width: 600px){
+  input {
+    width: 100%;
+  }
+}
  
  </style>
