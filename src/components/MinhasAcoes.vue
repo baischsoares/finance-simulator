@@ -101,9 +101,19 @@
         if(this.usuario.acoesCompradas[this.index].quantidade < 1){
           this.usuario.acoesCompradas.splice(this.index, 1)
         }
+        this.atualizarHistorico()
         this.$store.dispatch('atualizarUsuarioCompraAcao', this.usuario)
         this.vendendo = false
-      }
+      },
+      atualizarHistorico(){
+       let transacao = {}
+       transacao.tipo = 'venda'
+       transacao.acao = this.acaoVendida.symbol
+       transacao.total = this.quantidade * this.acaoVendida.precoAtual
+       transacao.quantidade = this.quantidade;
+       this.usuario.historico.unshift(transacao)
+
+     },
     },
    created(){
     this.fetchPrecoAtual();
