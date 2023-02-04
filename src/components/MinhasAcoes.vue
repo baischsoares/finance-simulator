@@ -111,8 +111,8 @@
        transacao.acao = this.acaoVendida.symbol
        transacao.total = this.quantidade * this.acaoVendida.precoAtual
        transacao.quantidade = this.quantidade;
-       this.usuario.historico.push(transacao)
-       console.log(this.usuario)
+       this.usuario.historico.unshift(transacao)
+
      },
     },
    created(){

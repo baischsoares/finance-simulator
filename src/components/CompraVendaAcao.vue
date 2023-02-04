@@ -89,8 +89,7 @@
        transacao.acao = acao.symbol
        transacao.total = this.quantidade * acao.regularMarketPrice
        transacao.quantidade = this.quantidade;
-       this.usuario.historico.push(transacao)
-       console.log(this.usuario)
+       this.usuario.historico.unshift(transacao)
      },
     confirmarCompra(){
       this.confirmacao = true
