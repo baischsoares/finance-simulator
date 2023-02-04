@@ -52,7 +52,7 @@
   #tabela{
     max-height: 250px;
     overflow-y: scroll;
-    width: 500px;
+    max-width: 500px;
   }
 .compra{
     color: green;
@@ -61,8 +61,14 @@
     color: red;
   }
 @media(max-width: 600px){
+  table{
+    width: 100%;
+  }
   tr {
     display: grid;
+  }
+  h2{
+    margin-top: 40px;
   }
 }
 

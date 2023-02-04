@@ -55,4 +55,9 @@ h3,span{
   color: white;
   border: none;
 }
+@media (max-width: 600px){
+  section{
+    grid-template-columns: 1fr;
+  }
+}
 </style>
