@@ -56,7 +56,7 @@
               //novos valores adicionados
             this.usuario.acoesCompradas[index].quantidade += this.quantidade;
 
-            let precoMedio = ((this.usuario.acoesCompradas[index].preco * this.usuario.acoesCompradas[index].quantidade) + (acao.regularMarketPrice + this.quantidade)) / (this.usuario.acoesCompradas[index].quantidade + this.quantidade) //calculo do preço médio das ações
+            let precoMedio = ((this.usuario.acoesCompradas[index].preco * this.usuario.acoesCompradas[index].quantidade) + (acao.regularMarketPrice * this.quantidade)) / (this.usuario.acoesCompradas[index].quantidade + this.quantidade) //calculo do preço médio das ações
 
             this.usuario.acoesCompradas[index].preco = precoMedio
             this.atualizarHistorico(acao)
