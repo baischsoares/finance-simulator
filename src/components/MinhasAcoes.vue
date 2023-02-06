@@ -28,8 +28,8 @@
         <label for="quantidade">Quantidade</label>
         <input type="number"  name="quantidade" id="quantidade" v-model="quantidade">
         <p class="erro" v-if="totalQuantidade < 0" style="font-size: 14px; color:red; font-weight:bold;;">Quantidade indisponível</p>
-        <p v-if="totalQuantidade > 0">Total: {{  $filters.valorEmReal(total) }}</p>
-        <input v-if="totalQuantidade > 0" type="submit" class="btn" value="Vender" @click.prevent="venderAcao">
+        <p v-if="totalQuantidade >= 0">Total: {{  $filters.valorEmReal(total) }}</p>
+        <input v-if="totalQuantidade >= 0" type="submit" class="btn" value="Vender" @click.prevent="venderAcao">
         <button class="btn cancelar" @click="vendendo = false">Cancelar</button>
       </form>
     </div>

@@ -44,7 +44,7 @@
    },
    methods: {
     comprar(acao){
-      console.log(this.usuario)
+      
        if(this.usuario.acoesCompradas.length > 0){
         //logica para conseguir o index da acao
         let acoesCodigos = Object.values(this.usuario.acoesCompradas)
@@ -55,12 +55,15 @@
             this.usuario.valor = this.saldo
               //novos valores adicionados
             this.usuario.acoesCompradas[index].quantidade += this.quantidade;
-            let precoMedio = ((this.usuario.acoesCompradas[index].preco * this.usuario.acoesCompradas[index].quantidade) + (acao.regularMarketPrice + this.quantidade)) / (this.usuario.acoesCompradas[index].quantidade + this.quantidade) //calculo do preço médio das ações
+
+            let precoMedio = ((this.usuario.acoesCompradas[index].preco * this.usuario.acoesCompradas[index].quantidade) + (acao.regularMarketPrice * this.quantidade)) / (this.usuario.acoesCompradas[index].quantidade + this.quantidade) //calculo do preço médio das ações
 
             this.usuario.acoesCompradas[index].preco = precoMedio
             this.atualizarHistorico(acao)
+            this.$store.dispatch('atualizarUsuarioCompraAcao', this.usuario)
 
             this.confirmarCompra()
+            console.log(this.usuario)
 
         } else {
           this.comprarAcao(acao)
