@@ -9,12 +9,14 @@
           <td>Quantidade</td>
           <td>Preço de Compra</td>
           <td>Preço Atual</td>
+          <td>Retorno do investimento</td>
         </tr>
         <tr v-for="(acao, index) in usuario.acoesCompradas" :key="index">
           <td>{{acao.symbol}}</td>
           <td>{{acao.quantidade}}</td>
           <td>{{ $filters.valorEmReal(acao.preco) }}</td>
           <td v-if="acao.precoAtual">{{ $filters.valorEmReal(acao.precoAtual)}}</td>
+          <td :class="(acao.retorno > 0) ? 'verde' : 'vermelho'"> {{ $filters.valorEmReal(acao.retorno)}} </td>
           <td><button class="btn-vender" @click="abrirModal(acao)">Vender</button></td>
         </tr>
       </table>
@@ -62,7 +64,8 @@
 
     totalQuantidade(){
       return this.acaoVendida.quantidade - this.quantidade
-    }
+    },
+    
    },
   methods:{
      fetchPrecoAtual(){
@@ -74,6 +77,7 @@
           //adiciona o preço atual no objeto ação
           let acaoPrecoAtual = r.results[0].regularMarketPrice
           acao.precoAtual = acaoPrecoAtual
+          acao.retorno = (acao.precoAtual - acao.preco) * acao.quantidade
         })
        })
        this.$store.dispatch('criarUsuario', this.usuario)
@@ -186,6 +190,12 @@ input[type="number"]{
   background: transparent;
   color: var(--corAzul);
   text-decoration: underline;
+}
+.verde{
+  color: green;
+}
+.vermelho{
+  color: red;
 }
 @media(max-width: 600px){
   tr {
