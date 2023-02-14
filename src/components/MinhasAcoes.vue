@@ -1,50 +1,49 @@
 <template >
   <section class="container">
-    <div class="secao">
-      <div v-if="usuario.acoesCompradas">
-      <h3>Minhas Ações</h3>
-      <table>
-        <tr>
-          <td>Ação</td>
-          <td>Quantidade</td>
-          <td>Preço de Compra</td>
-          <td>Preço Atual</td>
-          <td>Retorno do investimento</td>
-        </tr>
-        <tr v-for="(acao, index) in usuario.acoesCompradas" :key="index">
-          <td>{{acao.symbol}}</td>
-          <td>{{acao.quantidade}}</td>
-          <td>{{ $filters.valorEmReal(acao.preco) }}</td>
-          <td v-if="acao.precoAtual">{{ $filters.valorEmReal(acao.precoAtual)}}</td>
-          <td :class="(acao.retorno > 0) ? 'verde' : 'vermelho'"> {{ $filters.valorEmReal(acao.retorno)}} </td>
-          <td><button class="btn-vender" @click="abrirModal(acao)">Vender</button></td>
-        </tr>
-      </table>
+        <div class="secao">
+          <div v-if="usuario.acoesCompradas">
+          <h3>Minhas Ações</h3>
+          <table>
+            <tr>
+              <td>Ação</td>
+              <td>Quantidade</td>
+              <td>Preço de Compra</td>
+              <td>Preço Atual</td>
+            </tr>
+            <tr v-for="(acao, index) in usuario.acoesCompradas" :key="index">
+              <td>{{acao.symbol}}</td>
+              <td>{{acao.quantidade}}</td>
+              <td>{{ $filters.valorEmReal(acao.preco) }}</td>
+              <td v-if="acao.precoAtual">{{ $filters.valorEmReal(acao.precoAtual)}}</td>
+              <td v-if="acao.retorno" :class="(acao.retorno >= 0) ? 'verde' : 'vermelho'"> {{ $filters.valorEmReal(acao.retorno)}} </td>
+              <td><button class="btn-vender" @click="abrirModal(acao)">Vender</button></td>
+            </tr>
+          </table>
+        </div>
     </div>
-    </div>
-    <section v-if="vendendo" class="full-width">
+    <section class="full-width" v-if="vendendo">
       <div  class="form-container">
-      <h3>Vender - {{ acaoVendida.symbol }}</h3>
-      <form>
-        <p>Preço atual : {{  $filters.valorEmReal(acaoVendida.precoAtual) }}</p>
-        <label for="quantidade">Quantidade</label>
-        <input type="number"  name="quantidade" id="quantidade" v-model="quantidade">
-        <p class="erro" v-if="totalQuantidade < 0" style="font-size: 14px; color:red; font-weight:bold;;">Quantidade indisponível</p>
-        <p v-if="totalQuantidade >= 0">Total: {{  $filters.valorEmReal(total) }}</p>
-        <input v-if="totalQuantidade >= 0" type="submit" class="btn" value="Vender" @click.prevent="venderAcao">
-        <button class="btn cancelar" @click="vendendo = false">Cancelar</button>
-      </form>
-    </div>
+        <h3>Vender - {{ acaoVendida.symbol }}</h3>
+        <p>Preço: {{  $filters.valorEmReal(acaoVendida.precoAtual) }}</p>
+          <p v-if="lucroPrejuizo < 0">Prejuizo: <span :class="lucroPrejuizo < 0 ? 'vermelho' : ''">{{  $filters.valorEmReal(lucroPrejuizo) }}</span></p>
+          <p v-if="lucroPrejuizo >= 0">Lucro: <span :class="lucroPrejuizo > 0 ? 'verde' : ''">{{  $filters.valorEmReal(lucroPrejuizo) }}</span></p>
+        <form>
+          <label for="quantidade">Quantidade</label>
+          <input type="number"  name="quantidade" id="quantidade" v-model="quantidade">
+          <p class="erro" v-if="totalQuantidade < 0" style="font-size: 14px; color:red; font-weight:bold;;">Quantidade indisponível</p>
+          <p v-if="totalQuantidade >= 0">Total: {{  $filters.valorEmReal(total) }}</p> 
+          <input v-if="totalQuantidade >= 0" type="submit" class="btn" value="Vender" @click.prevent="venderAcao">
+          <button class="btn cancelar" @click="vendendo = false">Cancelar</button>
+        </form>
+      </div>
     </section>
-    
   </section>
-  
  </template>
+
  <script>
 
   export default {
    name: "MinhasAcoes",
-
    data(){
     return{
       acaoVendida: null,
@@ -65,6 +64,10 @@
     totalQuantidade(){
       return this.acaoVendida.quantidade - this.quantidade
     },
+
+     lucroPrejuizo(){
+       return (this.acaoVendida.precoAtual - this.acaoVendida.preco) * this.quantidade
+     },
     
    },
   methods:{
@@ -97,7 +100,7 @@
         this.index = acoesCompradasSimbolo.findIndex((acaoCodigo) => {
             return acaoCodigo === acao.symbol
         })
-        this.acaoVendida = acoesCompradas[ this.index]
+        this.acaoVendida = acoesCompradas[this.index]
       },
       venderAcao(){
         this.usuario.acoesCompradas[this.index].quantidade -= this.quantidade
@@ -108,6 +111,7 @@
         this.atualizarHistorico()
         this.$store.dispatch('atualizarUsuarioCompraAcao', this.usuario)
         this.vendendo = false
+        console.log(this.acaoVendida)
       },
       atualizarHistorico(){
        let transacao = {}
@@ -190,6 +194,9 @@ input[type="number"]{
   background: transparent;
   color: var(--corAzul);
   text-decoration: underline;
+}
+p{
+  margin-bottom: 5px;
 }
 .verde{
   color: green;
